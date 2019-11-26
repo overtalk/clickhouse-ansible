@@ -1,0 +1,21 @@
+- name: 创建工作目录
+  file:
+    path: "{{ DASE_DIR }}"
+    state: directory
+
+- name: 拷贝初始化脚本
+  copy:
+    src: "init.sh"
+    dest: "{{ DASE_DIR }}/init.sh"
+
+- name: 生成 host.sh
+  template: src=host.sh.j2 dest={{ DASE_DIR }}/host.sh
+
+- name: 加入host
+  shell: sh {{ DASE_DIR }}/host.sh
+
+- name: 执行初始化脚本
+  shell: sh {{ DASE_DIR }}/init.sh
+
+- name: 重启机器
+  reboot:

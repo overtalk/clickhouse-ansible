@@ -1,0 +1,2 @@
+- name: 卸载 zookeeper
+  shell: cd {{ DASE_DIR }}/zookeeper && sh ./uninstall.sh

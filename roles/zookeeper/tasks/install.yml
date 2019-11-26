@@ -1,0 +1,25 @@
+- name: 创建 zookeeper 相关工作目录
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ DASE_DIR }}/zookeeper"
+    - "/data/zookeeper/data"
+    - "/data/zookeeper/logs"
+
+- name: 拷贝 zookeeper 相关文件
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ DASE_DIR }}/zookeeper/{{ item.dest }}'
+  with_items:
+    - { src: 'zookeeper-3.4.14.tar.gz', dest: 'zookeeper-3.4.14.tar.gz' }
+    - { src: 'uninstall.sh', dest: 'uninstall.sh' }
+
+- name: 生成 zookeeper instll.sh
+  template: src=install.sh.j2 dest={{ DASE_DIR }}/zookeeper/install.sh
+
+- name: 生成 zookeeper zoo.cfg
+  template: src=zoo.cfg.j2 dest={{ DASE_DIR }}/zookeeper/zoo.cfg
+
+- name: 安装 zookeeper
+  shell: cd {{ DASE_DIR }}/zookeeper && sh ./install.sh

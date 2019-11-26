@@ -1,0 +1,11 @@
+# 安装
+- hosts:
+  - zookeeper
+  roles:
+  - {role: zookeeper, OP_TYPE: install } 
+
+# 启动
+- hosts:
+  - zookeeper
+  roles:
+  - {role: zookeeper, OP_TYPE: start } 

@@ -1,0 +1,15 @@
+# 安装zookeeper
+- import_tasks: install.yml
+  when: 'OP_TYPE == "install"'
+
+# 启动zookeeper
+- import_tasks: start.yml
+  when: 'OP_TYPE == "start"'
+
+# 停止zookeeper
+- import_tasks: stop.yml
+  when: 'OP_TYPE == "stop"'
+
+# 卸载zookeeper
+- import_tasks: uninstall.yml
+  when: 'OP_TYPE == "uninstall"'

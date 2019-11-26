@@ -1,0 +1,6 @@
+# 停止zookeeper
+# 不删除日志/数据
+- hosts:
+  - zookeeper
+  roles:
+  - {role: zookeeper, OP_TYPE: stop } 

@@ -1,0 +1,6 @@
+# 卸载zookeeper
+# 删除所有的日志以及数据
+- hosts:
+  - zookeeper
+  roles:
+  - {role: zookeeper, OP_TYPE: uninstall } 

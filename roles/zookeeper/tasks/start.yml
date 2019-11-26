@@ -1,0 +1,2 @@
+- name: 安装 zookeeper
+  shell: cd  /usr/local/zookeeper/bin/ && sh zkServer.sh start

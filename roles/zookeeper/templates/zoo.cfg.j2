@@ -1,0 +1,60 @@
+# quorumListenOnAllIPs=true
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial 
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between 
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just 
+# example sakes.
+dataDir=/data/zookeeper/data
+# log dir
+dataLogDir=/data/zookeeper/logs
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+# maxClientCnxns=2000
+#
+# Be sure to read the maintenance section of the 
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+autopurge.snapRetainCount=500
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+autopurge.purgeInterval=24
+
+# Maximum session timeout.
+# maxSessionTimeout=60000000
+
+# Maximum number of requests waiting to be processed.
+# globalOutstandingLimit=200
+
+# Log file size Kb, switch snapshots to generate logs
+# preAllocSize=131072
+
+# Number of executable transactions between two transaction snapshots. 
+# The default configuration value is 100,000.Number of executable transactions between two transaction snapshots. 
+# The default configuration value is 100,000.
+# snapCount=3000000
+
+# Whether the leader accepts client requests
+# default is yes, the leader can accept client connections.
+# When the number of nodes is> 3, it is recommended to close.
+# leaderServes=no
+
+# 2888 leader \ follower transmission information port
+# 3888 referral port
+# the port at which the clients will connect
+clientPort=2181
+{% for ip in groups['zookeeper'] %}
+{% if  ip == "inventory_hostname" %}
+server.{{ hostvars[ip]['ZOOKEEPER_INDEX'] }}=0.0.0.0:2888:3888
+{% else %}
+server.{{ hostvars[ip]['ZOOKEEPER_INDEX'] }}=zookeeper{{ hostvars[ip]['ZOOKEEPER_INDEX'] }}:2888:3888
+{% endif %}
+{% endfor %}

@@ -1,0 +1,24 @@
+#! /bin/bash
+
+# 下载安装包
+if [ ! -f zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz ]; then
+    curl -O http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-{{ ZOOKEEPER_VERSION }}/zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz
+fi
+
+# 解压
+rm -rf /usr/local/zookeeper-{{ ZOOKEEPER_VERSION }}
+tar -zvxf zookeeper-{{ ZOOKEEPER_VERSION }}.tar.gz -C /usr/local
+mv /usr/local/zookeeper-{{ ZOOKEEPER_VERSION }} /usr/local/zookeeper
+
+# 创建目录
+rm -rf /data/zookeeper/data
+rm -rf /data/zookeeper/logs
+mkdir /data/zookeeper/data
+mkdir /data/zookeeper/logs
+chmod -R 777 /data/zookeeper/data
+chmod -R 777 /data/zookeeper/logs
+
+# 指定节点号
+echo {{ ZOOKEEPER_INDEX }} > /data/zookeeper/data/myid
+
+cp ./zoo.cfg /usr/local/zookeeper/conf/zoo.cfg

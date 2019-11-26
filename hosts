@@ -1,0 +1,14 @@
+[zookeeper]
+192.168.189.148 ZOOKEEPER_INDEX=1
+192.168.189.147 ZOOKEEPER_INDEX=2
+192.168.189.149 ZOOKEEPER_INDEX=3
+
+[all:vars]
+ansible_ssh_user=root
+
+
+# --------- Main Variables ---------------
+# Deploy Directory (kubeasz workspace)
+DASE_DIR="~/clickhouse"
+
+ZOOKEEPER_VERSION="3.4.14"
