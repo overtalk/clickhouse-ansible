@@ -1,0 +1,5 @@
+# 卸载 clickhouse
+- hosts:
+  - clickhouse
+  roles:
+  - {role: clickhouse, OP_TYPE: uninstall } 

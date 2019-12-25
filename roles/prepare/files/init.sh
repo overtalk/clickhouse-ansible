@@ -21,6 +21,14 @@ function java()
     yum install java-1.8.0-openjdk-devel.x86_64 -y
 }
 
+function rpm()
+{
+    curl -s https://packagecloud.io/install/repositories/Altinity/clickhouse/script.rpm.sh | sudo bash
+    # 更新 yum 源
+    yum -q makecache -y --disablerepo='*' --enablerepo='Altinity_clickhouse' 
+}
+
 stop_firewall
 disable_selinux
 java
+rpm

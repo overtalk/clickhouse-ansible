@@ -1,0 +1,2 @@
+- name: 启动 clickhouse-server
+  shell: systemctl start clickhouse-server

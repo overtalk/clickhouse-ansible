@@ -1,0 +1,5 @@
+# 停止 clickhouse
+- hosts:
+  - clickhouse
+  roles:
+  - {role: clickhouse, OP_TYPE: stop } 

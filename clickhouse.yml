@@ -1,0 +1,11 @@
+# 安装
+- hosts:
+  - clickhouse
+  roles:
+  - {role: clickhouse, OP_TYPE: install } 
+
+# 启动
+- hosts:
+  - clickhouse
+  roles:
+  - {role: clickhouse, OP_TYPE: start } 

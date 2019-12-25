@@ -1,0 +1,6 @@
+- import_tasks: stop.yml
+
+- name: 卸载 clickhouse-server 
+  shell: yum -y remove clickhouse-server
+
+

@@ -1,0 +1,13 @@
+- name: yum 安装 clickhouse-server & clickhouse-client
+  shell: yum install -y clickhouse-server clickhouse-client
+  
+- name: 生成 clickhouse metrika.xml
+  template: src=metrika.xml.j2 dest=/etc/clickhouse-server/metrika.xml
+
+- name: 拷贝 clickhouse 相关配置文件
+  copy:
+    src: '{{ item.src }}'
+    dest: '/etc/clickhouse-server/{{ item.dest }}'
+  with_items:
+    - { src: 'config.xml', dest: 'config.xml' }
+    - { src: 'users.xml', dest: 'users.xml' }
