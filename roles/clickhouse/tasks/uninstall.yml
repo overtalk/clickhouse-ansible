@@ -3,4 +3,5 @@
 - name: 卸载 clickhouse-server 
   shell: yum -y remove clickhouse-server
 
-
+- name: 删除表数据
+  shell: rm -rf /var/lib/clickhouse/

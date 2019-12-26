@@ -1,31 +1,25 @@
 <yandex>
     <!-- 集群配置 -->
     <clickhouse_remote_servers>
-        <cluster_3s_1r>
+        <clickhouse_cluster>
 
         <!-- 数据分片  -->
-{% for ip in groups['clickhouse'] %}
+{% for group in groups %}
+{% if group[:5] == 'shard' %}
         <shard>
             <internal_replication>true</internal_replication>
+{% for ip in groups[group] %}
                 <replica>
                     <host>{{ ip }}</host>
                     <port>9000</port>
                     <user>default</user>
                     <password></password>
                 </replica>
-                <replica>
-{% if loop.index == loop.length %}
-                    <host>{{ groups['clickhouse'][1] }}</host>
-{% else %}
-                    <host>{{ groups['clickhouse'][loop.index] }}</host>
-{% endif %}
-                    <port>9000</port>
-                    <user>default</user>
-                    <password></password>
-                </replica>
-        </shard>
 {% endfor %}
-        </cluster_3s_1r>
+        </shard>
+{% endif %}
+{% endfor %}
+        </clickhouse_cluster>
     </clickhouse_remote_servers>
 
     <!-- ZK  -->
@@ -41,6 +35,11 @@
     <networks>
         <ip>::/0</ip>
     </networks>
+
+    <macros>
+        <shard>shard_{{CLICKHOUSE_SHARD}}</shard>
+        <replica>replica_{{CLICKHOUSE_REPLICA}}</replica>
+    </macros>
 
     <!-- 数据压缩算法  -->
     <clickhouse_compression>
