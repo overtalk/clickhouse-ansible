@@ -9,16 +9,17 @@
         <shard>
             <internal_replication>true</internal_replication>
 {% for ip in groups[group] %}
-                <replica>
-                    <host>{{ ip }}</host>
-                    <port>9000</port>
-                    <user>default</user>
-                    <password></password>
-                </replica>
+            <replica>
+                <host>{{ ip }}</host>
+                <port>9000</port>
+                <user>default</user>
+                <password></password>
+            </replica>
 {% endfor %}
         </shard>
 {% endif %}
 {% endfor %}
+
         </clickhouse_cluster>
     </clickhouse_remote_servers>
 
@@ -37,9 +38,10 @@
     </networks>
 
     <macros>
-        <shard>shard_{{CLICKHOUSE_SHARD}}</shard>
-        <replica>replica_{{CLICKHOUSE_REPLICA}}</replica>
+        <shard>shard-{{CLICKHOUSE_SHARD}}</shard>
+        <replica>replica-{{CLICKHOUSE_REPLICA}}</replica>
     </macros>
+
 
     <!-- 数据压缩算法  -->
     <clickhouse_compression>
