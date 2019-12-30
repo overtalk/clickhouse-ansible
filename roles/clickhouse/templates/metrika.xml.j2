@@ -1,7 +1,7 @@
 <yandex>
     <!-- 集群配置 -->
     <clickhouse_remote_servers>
-        <clickhouse_cluster>
+        <{{CLICKHOUSE_CLUSTER_NAME}}>
 
         <!-- 数据分片  -->
 {% for group in groups %}
@@ -20,7 +20,7 @@
 {% endif %}
 {% endfor %}
 
-        </clickhouse_cluster>
+        </{{CLICKHOUSE_CLUSTER_NAME}}>
     </clickhouse_remote_servers>
 
     <!-- ZK  -->

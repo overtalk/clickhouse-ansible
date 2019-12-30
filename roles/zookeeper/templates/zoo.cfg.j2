@@ -55,6 +55,6 @@ clientPort=2181
 {% if  ip == "inventory_hostname" %}
 server.{{ hostvars[ip]['ZOOKEEPER_INDEX'] }}=0.0.0.0:2888:3888
 {% else %}
-server.{{ hostvars[ip]['ZOOKEEPER_INDEX'] }}=zookeeper{{ hostvars[ip]['ZOOKEEPER_INDEX'] }}:2888:3888
+server.{{ hostvars[ip]['ZOOKEEPER_INDEX'] }}={{ ip }}:2888:3888
 {% endif %}
 {% endfor %}
